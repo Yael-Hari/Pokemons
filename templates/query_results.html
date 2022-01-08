@@ -1,0 +1,83 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<body style="background-color: #CFB372; text-align: center; color:#000000">
+
+    <table align="center" style="background-color:#EFD28D">
+        <tr>
+            <td align="center" width="90px"><a href="home" style="color:#14790F">Home</a></td>
+            <td align="center" width="120px"><a href="query_results" style="color:#14790F">Query Results</a></td>
+            <td align="center" width="150px"><a href="add_a_pokemon" style="color:#14790F">Add a Pokemon</a></td>
+        </tr>
+    </table>
+    <br>
+
+    <h1 style="color:#14790F"> Query Results </h1>
+
+{##############################################################################################################}
+{#Q1#}
+    <div>Strongest Pokemon that are legendary, by generation:</div>
+    <table border="1" align="center">
+        <th>Generation</th>
+        <th>Pokemon</th>
+            {% for pokemon in sql_res1 %}
+            <tr>
+            <td>{{ pokemon.Generation }} </td>
+            <td>{{ pokemon.Name }} </td>
+            </tr>
+        {% endfor %}
+    </table><br><br>
+
+{##############################################################################################################}
+{#Q2#}
+
+    <div>Dominant Pokemon by type:</div>
+    <table align="center" border="1">
+        <th>Type</th>
+        <th>Pokemon</th>
+            {% for pokemon in sql_res2 %}
+            <tr>
+            <td>{{ pokemon.Type }} </td>
+            <td>{{ pokemon.Name }} </td>
+            </tr>
+        {% endfor %}
+    </table><br><br>
+
+{##############################################################################################################}
+{#Q3#}
+    <div>Type with stronger than ATTACK THRESHOLD and more than POKEMON COUNT Pokemon:</div>
+    <form method="POST">
+        {% csrf_token %}
+        ATTACK THRESHOLD:<input type="number" min="0" name="attack_threshold" rows="1" cols="10"><br>
+        POKEMON COUNT:<input type="number" min="0" name="pokemon_count" rows="1" cols="10"><br>
+        <input type="submit">
+    </form>
+
+    {% if sql_res3 %}
+        <table border="1" align="center">
+        <th>Type</th>
+        {% for pokemon in sql_res3 %}
+            <tr>
+            <td>{{ pokemon.Type }} </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+    <br>
+{##############################################################################################################}
+{#Q4#}
+
+    <div> Type with highest instability: </div>
+    <table align="center" border="1">
+        <th> Type </th>
+        <th> Average Instability </th>
+            {% for pokemon in sql_res4 %}
+            <tr>
+            <td>{{ pokemon.type }} </td>
+            <td>{{ pokemon.maxUNSTABLE }} </td>
+            </tr>
+        {% endfor %}
+    </table><br><br>
+
+
+</body>

@@ -1,0 +1,29 @@
+{% load static %}
+<link rel="stylesheet" href="{%  static 'style.css' %}">
+
+<body style="background-color: #CFB372; text-align: center; color:#DEC999">
+
+    <table align="center" style="background-color:#EFD28D">
+        <tr>
+            <td align="center" width="90px"><a href="home" style="color:#14790F">Home</a></td>
+            <td align="center" width="120px"><a href="query_results" style="color:#14790F">Query Results</a></td>
+            <td align="center" width="150px"><a href="add_a_pokemon" style="color:#14790F">Add a Pokemon</a></td>
+        </tr>
+    </table>
+    <br>
+
+    <h1 style="color:#14790F"> Add A Pokemon </h1>
+    <form method="POST" style="color:#000000">
+        {% csrf_token %}
+        Name:       <input name="Name" rows="1" cols="50" minlength="2" maxlength="50" required></input><br>
+        Type:       <input name="Type" rows="1" cols="50" maxlength="50" required></input><br>
+        Generation: <input type="number" name="Generation" rows="1" cols="50" min="1" max="6" step="1" required><br>
+        Legendary:  <input type="checkbox" name="Legendary"><br>
+        HP:         <input type="number" name="HP" rows="1" cols="50" min="1" max="300" step="1" required><br>
+        Attack:     <input type="number" name="Attack" rows="1" cols="50" min="1" max="300" step="1" required><br>
+        Defense:    <input type="number" name="Defense" rows="1" cols="50" min="1" max="300" step="1" required><br>
+        <input type="submit">
+    </form>
+
+
+</body>
